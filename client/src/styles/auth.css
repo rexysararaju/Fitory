@@ -1,0 +1,77 @@
+/* Center entire page */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1e1e1e;
+  padding: 20px;
+}
+
+/* Login/Register box */
+.auth-container {
+  width: 350px;
+  padding: 30px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+/* Title */
+.auth-container h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Inputs */
+.auth-input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  outline: none;
+  background: #f3f3f3;
+  transition: 0.3s;
+}
+
+.auth-input:focus {
+  border-color: #6b5cff;
+}
+
+/* Button */
+.auth-btn {
+  padding: 12px;
+  font-size: 16px;
+  background: #6b5cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.auth-btn:hover {
+  background: #584cff;
+}
+
+/* Bottom text */
+.auth-text {
+  margin-top: 15px;
+  color: #555;
+}
+
+.auth-text a {
+  color: #6b5cff;
+  text-decoration: none;
+  font-weight: 600;
+}
