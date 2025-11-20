@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../api/api";
 import "../styles/auth.css";
-import logo from "/fitory-logo.jpg";
+import logo from "../assets/fitory-logo.jpg";
+
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -54,14 +55,15 @@ function RegisterPage() {
           <label className="auth-label">
             Full name
             <input
-              type="text"
-              placeholder="Your name"
-              className="auth-input"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
+            type="text"
+            autoComplete="name"
+            placeholder="Your name"
+            className="auth-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
             />
-          </label>
+            </label>
 
           <label className="auth-label">
             Email

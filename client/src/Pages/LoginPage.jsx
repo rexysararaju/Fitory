@@ -4,7 +4,8 @@ import API from "../api/api";
 import "../styles/auth.css";
 
 
-import logo from "/fitory-logo.jpg";
+import logo from "../assets/fitory-logo.jpg";
+
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -46,27 +47,27 @@ function LoginPage() {
               Build consistent training habits with a planner that keeps every
               session, plan, and progress update in one place.
             </p>
+{/* 
+                        <div className="membership-grid">
+            <div className="membership-card">
+                <span className="membership-label">Starter plan</span>
+                <span className="membership-price">Free</span>
+                <span className="membership-note">
+                Basic workout creation &amp; tracking
+                </span>
+            </div>
 
-            <div className="membership-grid">
-  <div className="membership-card">
-    <span className="membership-label">Starter plan</span>
-    <span className="membership-price">Free</span>
-    <span className="membership-note">
-      Basic workout creation &amp; tracking
-    </span>
-  </div>
-
-  <div className="membership-card membership-card--accent">
-    <span className="membership-label">Pro plan</span>
-    <span className="membership-price">$14.99 / mo</span>
-    <span className="membership-note">
-      Advanced analytics • Progress charts • Custom programs
-    </span>
-  </div>
-</div>
+            <div className="membership-card membership-card--accent">
+                <span className="membership-label">Pro plan</span>
+                <span className="membership-price">$14.99 / mo</span>
+                <span className="membership-note">
+                Advanced analytics • Progress charts • Custom programs
+                </span>
+            </div>
+            </div> */}
 
 
-            <ul className="feature-list">
+                        <ul className="feature-list">
               <li>Smart workout scheduling so you never miss a session.</li>
               <li>Visual progress tracking to stay motivated over time.</li>
               <li>Designed for people who take training seriously.</li>
