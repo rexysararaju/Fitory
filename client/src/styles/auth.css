@@ -1,4 +1,3 @@
-
 .auth-page {
   min-height: 100vh;
   width: 100vw;
@@ -24,8 +23,6 @@
   grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
   overflow: hidden;
 }
-
-
 
 .auth-left {
   background: radial-gradient(circle at top left, #111827 0, #020617 65%);
@@ -63,8 +60,6 @@
   color: #9ca3af;
 }
 
-
-
 .hero-title {
   font-size: 32px;
   line-height: 1.15;
@@ -78,7 +73,6 @@
   color: #9ca3af;
   max-width: 380px;
 }
-
 
 .membership-grid {
   display: grid;
@@ -121,7 +115,6 @@
   color: #e5e7eb;
 }
 
-
 .feature-list {
   margin-top: 14px;
   padding-left: 18px;
@@ -145,14 +138,10 @@
   color: #a5b4fc;
 }
 
-
-
 .auth-footer {
   font-size: 12px;
   color: #71717a;
 }
-
-
 
 .auth-right {
   padding: 36px 40px 28px;
@@ -165,7 +154,6 @@
   width: 100%;
   max-width: 380px;
 }
-
 
 .form-header {
   display: flex;
@@ -200,7 +188,6 @@
   color: #6b7280;
 }
 
-
 .auth-form-title {
   font-size: 22px;
   font-weight: 700;
@@ -229,15 +216,29 @@
   color: #374151;
 }
 
-
-
+/* ========= 关键修改：输入框样式 ========= */
 .auth-input {
-  height: 42px;
+  width: 100%;
+  height: 44px;
   border-radius: 999px;
-  border: 1px solid #e5e7eb;
   padding: 0 16px;
-  font-size: 13px;
+  box-sizing: border-box;
+
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: inherit;
+
+  /* 一定要能看见的文字颜色 */
+  color: #111827;
+  -webkit-text-fill-color: #111827;
+  text-shadow: none;
+
   outline: none;
+  caret-color: #4f46e5;
+
   transition:
     border-color 0.16s ease,
     box-shadow 0.16s ease,
@@ -247,6 +248,7 @@
 
 .auth-input::placeholder {
   color: #d1d5db;
+  opacity: 1;
 }
 
 .auth-input:focus {
@@ -257,13 +259,10 @@
   transform: translateY(-1px);
 }
 
-
-
 .auth-error {
   font-size: 12px;
   color: #b91c1c;
 }
-
 
 .auth-button {
   margin-top: 8px;
@@ -302,7 +301,6 @@
     0 0 0 1px rgba(15, 23, 42, 0.9);
 }
 
-
 .auth-switch {
   font-size: 13px;
   color: #6b7280;
@@ -319,8 +317,6 @@
 .auth-link:hover {
   text-decoration: underline;
 }
-
-
 
 @media (max-width: 900px) {
   .auth-card {
@@ -345,8 +341,6 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
-
-
 
 .auth-container {
   max-width: 360px;
@@ -379,7 +373,6 @@
   justify-content: center;
 }
 
-
 .auth-panel {
   width: 100%;
   max-width: 520px;
@@ -395,14 +388,16 @@
   margin-bottom: 20px;
 }
 
-
 .auth-switch--center {
   text-align: center;
   margin-top: 16px;
 }
 
-/* Prevent browsers from masking text fields */
-input[type="text"],
-input[type="email"] {
-  -webkit-text-security: none !important;
+
+.auth-panel input.auth-input,
+.auth-right input.auth-input,
+.auth-form input.auth-input {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+  text-shadow: none !important;
 }
