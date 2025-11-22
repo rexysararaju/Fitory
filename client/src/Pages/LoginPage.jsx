@@ -18,7 +18,7 @@ function LoginPage() {
     setError("");
 
     try {
-      const res = await API.post("/login", { email, password });
+      const res = await API.post("/auth/login", { email, password });
 
       localStorage.setItem("token", res.data.token);
 
