@@ -23,7 +23,7 @@ function RegisterPage() {
     }
 
     try {
-      await API.post("/register", { name, email, password });
+      await API.post("/auth/register", { name, email, password });
 
       alert("Account created!");
       navigate("/login");
