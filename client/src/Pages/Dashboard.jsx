@@ -7,19 +7,22 @@ import CalendarView from "../components/CalendarView";
 function Dashboard() {
     const [workouts, setWorkouts] = useState([]);
     const [loading, setLoading] = useState(true);
-
     const [selectedDate, setSelectedDate] = useState(null);
 
     const fetchWorkouts = async () => {
         try {
             const token = localStorage.getItem("token");
-            const config = {
-                headers: { Authorization: `Bearer ${token}` },
-            };
-            const res = await API.get("/workouts", config);
 
-            const sortedData = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            setWorkouts(sortedData);
+            const res = await API.get("/workouts", {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            // Sort by workout date
+            const sorted = res.data.sort(
+                (a, b) => new Date(b.date) - new Date(a.date)
+            );
+
+            setWorkouts(sorted);
             setLoading(false);
         } catch (err) {
             console.error("Error fetching workouts:", err);
@@ -28,12 +31,15 @@ function Dashboard() {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm("Are you sure you want to delete this workout?")) return;
+        if (!window.confirm("Delete this workout?")) return;
+
         try {
             const token = localStorage.getItem("token");
+
             await API.delete(`/workouts/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
+
             setWorkouts(workouts.filter((w) => w._id !== id));
         } catch (err) {
             alert("Failed to delete");
@@ -44,15 +50,19 @@ function Dashboard() {
         fetchWorkouts();
     }, []);
 
+    // Filter by selected date
     const filteredWorkouts = selectedDate
-        ? workouts.filter(workout =>
-            new Date(workout.createdAt).toDateString() === selectedDate.toDateString()
-        )
+        ? workouts.filter(
+              (w) =>
+                  new Date(w.date).toDateString() ===
+                  selectedDate.toDateString()
+          )
         : workouts;
 
     return (
-        <div>
+        <div className="dashboard-bg">
             <Navbar />
+
             <div className="container">
                 <h1 className="page-title">My Workout Log</h1>
 
@@ -63,8 +73,8 @@ function Dashboard() {
                     />
                 )}
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '30px', marginBottom: '15px' }}>
-                    <h2 className="section-title" style={{ marginBottom: 0 }}>
+                <div className="section-header">
+                    <h2 className="section-title">
                         {selectedDate
                             ? `Workouts on ${selectedDate.toLocaleDateString()}`
                             : "All History"}
@@ -72,8 +82,8 @@ function Dashboard() {
 
                     {selectedDate && (
                         <button
+                            className="btn-show-all"
                             onClick={() => setSelectedDate(null)}
-                            style={{ padding: '8px 12px', background: '#95a5a6', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
                         >
                             Show All
                         </button>
@@ -92,29 +102,53 @@ function Dashboard() {
                     </div>
                 ) : (
                     <div className="workout-grid">
-                        {filteredWorkouts.map((workout) => (
-                            <div key={workout._id} className="workout-card">
+                        {filteredWorkouts.map((w) => (
+                            <div key={w._id} className="workout-card">
                                 <div className="card-header">
-                                    <h3>{workout.name}</h3>
+                                    <h3>{w.name}</h3>
                                     <span className="workout-date">
-                                        {new Date(workout.createdAt).toLocaleDateString()}
+                                        {new Date(w.date).toLocaleDateString()}
                                     </span>
                                 </div>
-                                {workout.description && <p className="workout-desc">{workout.description}</p>}
 
-                                <div className="exercise-list">
-                                    {workout.exercises.map((ex, idx) => (
-                                        <div key={idx} className="exercise-item">
-                                            <span className="ex-name">{ex.name}</span>
-                                            <span className="ex-detail">
-                                                {ex.sets} sets x {ex.reps} reps ({ex.weight}kg)
-                                            </span>
-                                        </div>
-                                    ))}
+                                {w.description && (
+                                    <p className="workout-desc">{w.description}</p>
+                                )}
+
+                         <div className="exercise-list">
+                            {w.exercises.map((ex, idx) => (
+                                <div key={idx} className="exercise-item">
+                                   <span className="ex-name">{ex.name}</span>
+
+                                        <span className="ex-detail">
+                                            {/* Strength */}
+                                                {ex.sets != null && ex.reps != null && ex.weight != null && (
+                                                 `${ex.sets} sets × ${ex.reps} reps (${ex.weight}kg)`
+                                    )}
+
+                                                      {/* Walking */}
+                                                          {ex.steps != null && (
+                                                         `${ex.steps} steps`
+                                    )}
+
+                                                 {/* Cycling */}
+                                                {ex.duration != null && (
+                                            `${ex.duration} min cycling`
+                                              )}
+
+                                              {/* Running */}
+                                             {ex.distance != null && (
+                                          `${ex.distance} km`
+                                                    )}
+                                    </span>
                                 </div>
+                         ))}
+                         </div>
+
+
                                 <button
                                     className="btn-delete"
-                                    onClick={() => handleDelete(workout._id)}
+                                    onClick={() => handleDelete(w._id)}
                                 >
                                     Delete
                                 </button>
