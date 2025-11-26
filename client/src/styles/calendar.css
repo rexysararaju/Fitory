@@ -1,20 +1,67 @@
-/* client/src/styles/calendar.css */
-
+/* CALENDAR CONTAINER */
 .calendar-container {
   background: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
   margin-bottom: 30px;
-  border: 1px solid #ddd;
+  border: 1px solid #e5e7eb;
 }
 
+/* MAIN CALENDAR */
 .react-calendar {
-  width: 100% !important; 
+  width: 100% !important;
   border: none !important;
-  font-family: inherit;
+  font-family: system-ui, sans-serif !important;
+  background: white !important;
 }
 
+/* WEEKDAY LABELS (MON, TUE, WED...) */
+.react-calendar__month-view__weekdays__weekday {
+  color: #6b7280 !important; /* Gray-500 */
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding-bottom: 8px;
+}
+
+/* DAY NUMBERS (THIS FIXES YOUR WHITE TEXT PROBLEM) */
+.react-calendar__tile {
+  color: #1f2937 !important; /* Dark text */
+  font-weight: 500;
+  background: white !important;
+}
+
+/* DISABLED DAYS */
+.react-calendar__tile:disabled {
+  color: #d1d5db !important; /* Gray-300 */
+  background: #f3f4f6 !important;
+  border-radius: 6px;
+}
+
+/* TODAY */
+.react-calendar__tile--now {
+  background: #e5edff !important;
+  color: #1f2937 !important;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* SELECTED DATE */
+.react-calendar__tile--active {
+  background: #3498db !important;
+  color: white !important;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* HOVER EFFECT */
+.react-calendar__tile:hover {
+  background: #eef2ff !important;
+  border-radius: 6px;
+}
+
+/* BLUE DOT UNDER DAYS WITH WORKOUTS */
 .dot {
   height: 8px;
   width: 8px;
@@ -22,16 +69,5 @@
   border-radius: 50%;
   margin: 0 auto;
   margin-top: 5px;
-  display: block !important; 
-}
-
-.react-calendar__tile--now {
-  background: #ecf0f1 !important;
-  border-radius: 6px;
-}
-
-.react-calendar__tile--active {
-  background: #3498db !important;
-  color: white !important;
-  border-radius: 6px;
+  display: block !important;
 }
