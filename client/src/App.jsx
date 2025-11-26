@@ -3,6 +3,8 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import Dashboard from "./Pages/Dashboard";
 import WorkoutForm from "./pages/WorkoutForm";
+import HistoryPage from "./pages/HistoryPage";
+import ProgressPage from "./pages/ProgressPage";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-workout" element={<WorkoutForm />} />
+        <Route path="/history" element={<HistoryPage />} />
+        <Route path="/progress" element={<ProgressPage />} />
       </Routes>
     </BrowserRouter>
   );

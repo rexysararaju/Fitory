@@ -15,13 +15,21 @@ const workoutSchema = new mongoose.Schema(
       type: String,
     },
     exercises: [
-      {
-        name: { type: String, required: true },
-        sets: { type: Number, default: 3 },
-        reps: { type: Number, default: 10 },
-        weight: { type: Number, default: 0 },
-      },
-    ],
+  {
+    name: { type: String, required: true },
+
+    // Strength fields
+    sets: { type: Number, default: null },
+    reps: { type: Number, default: null },
+    weight: { type: Number, default: null },
+
+    // Cardio fields
+    duration: { type: Number, default: null }, // minutes
+    distance: { type: Number, default: null }, // km
+    steps: { type: Number, default: null }     // number of steps
+  }
+  ],
+
     date: {
       type: Date,
       default: Date.now,
