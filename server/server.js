@@ -2,10 +2,12 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js";
+
+// Routes Import
 import authRoutes from "./routes/authRoutes.js";
 import workoutRoutes from "./routes/workoutRoutes.js";
-
 import templateRoutes from "./routes/templateRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -27,6 +29,9 @@ app.use("/api/workouts", workoutRoutes);
 
 // Workout Template routes
 app.use("/api/templates", templateRoutes);
+
+// User Routes
+app.use("/api/users", userRoutes);
 
 
 const PORT = process.env.PORT || 5001;
