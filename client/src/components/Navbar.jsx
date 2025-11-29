@@ -1,47 +1,60 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/navbar.css"; 
+import "../styles/navbar.css";
+import logo from "../assets/fitory-logo.jpg";
+
+
 
 function Navbar() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        localStorage.removeItem("email");   
-        navigate("/login");
-    };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
+    localStorage.removeItem("role");
+    navigate("/login");
+  };
 
-    return (
-        <nav className="navbar-container">
-            <div className="nav-left">
-                {/* 1. logo */}
-                <Link to="/dashboard" className="nav-logo">
-                    Fitory
-                </Link>
+  const role = localStorage.getItem("role");
 
-                {/* 2. Nav links */}
-                <div className="nav-links">
-                    <Link to="/dashboard" className="nav-item">Dashboard</Link>
-                    <Link to="/users" className="nav-item">Users</Link>
-                    <Link to="/profile" className="nav-item">My Profile</Link>
-                    <Link to="/history" className="nav-item">History</Link>
-                    <Link to="/progress" className="nav-item">Progress</Link>
-                </div>
-            </div>
+  return (
+    <nav className="navbar-container">
+      <div className="nav-left">
 
-            <div className="nav-right">
-                <Link to="/create-workout" className="btn-primary">
-                    + Record Workout
-                </Link>
+        {/* LOGO + TEXT INSIDE ONE LINK */}
+        <Link to="/dashboard" className="nav-logo">
+            <img src={logo} alt="Fitory Logo" className="nav-logo-img" />
+            <span className="nav-logo-text">Fitory</span>
+        </Link>
 
-                {/* 3. signout*/}
-                <button onClick={handleLogout} className="btn-logout">
-                    Logout
-                </button>
-            </div>
-        </nav>
-    );
+
+        {/* NAV LINKS */}
+        <div className="nav-links">
+          <Link to="/dashboard" className="nav-item">Dashboard</Link>
+
+          {/* SHOW ONLY FOR ADMINS */}
+          {role === "admin" && (
+            <Link to="/users" className="nav-item">Users</Link>
+          )}
+
+          <Link to="/profile" className="nav-item">My Profile</Link>
+          <Link to="/history" className="nav-item">History</Link>
+          <Link to="/progress" className="nav-item">Progress</Link>
+        </div>
+      </div>
+
+      <div className="nav-right">
+        <Link to="/create-workout" className="btn-primary">
+          + Record Workout
+        </Link>
+
+        <button onClick={handleLogout} className="btn-logout">
+          Logout
+        </button>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;
