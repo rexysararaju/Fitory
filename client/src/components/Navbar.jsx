@@ -39,6 +39,7 @@ function Navbar() {
           )}
 
           <Link to="/profile" className="nav-item">My Profile</Link>
+          <Link to="/create-workout" className="nav-item">Record Workout</Link>
           <Link to="/history" className="nav-item">History</Link>
           <Link to="/progress" className="nav-item">Progress</Link>
         </div>
