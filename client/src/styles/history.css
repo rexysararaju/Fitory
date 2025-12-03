@@ -1,8 +1,12 @@
+/***************************************
+   CLEAN + MODERN HISTORY PAGE STYLE
+****************************************/
+
 /* CONTAINER */
 .history-container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 30px 20px;
+    padding: 32px 20px;
 }
 
 /* PAGE TITLE */
@@ -10,53 +14,55 @@
     font-size: 2rem;
     font-weight: 700;
     color: #1f2937;
-    margin-bottom: 25px;
+    margin-bottom: 24px;
 }
 
 /* EMPTY STATE */
 .empty-state {
     margin-top: 40px;
     padding: 40px;
-    background: #f9fafb;
+    background: #f3f4f6;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
     text-align: center;
     color: #6b7280;
+    font-size: 1rem;
 }
 
-/* WORKOUT CARD LIST */
+/* LIST OF HISTORY CARDS */
 .history-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 22px;
 }
 
-/* HISTORY CARD */
+/* CARD */
 .history-card {
-    background: white;
+    background: #ffffff;
     border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 20px 25px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    border-radius: 14px;
+    padding: 22px 26px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     transition: transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 .history-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
-/* HEADER: NAME + DATE */
+/* HEADER — name & date */
 .history-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .history-header h3 {
     margin: 0;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: #111827;
 }
 
@@ -67,30 +73,40 @@
 
 /* DESCRIPTION */
 .history-desc {
-    margin-top: 5px;
-    margin-bottom: 12px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
     color: #4b5563;
+    line-height: 1.5;
 }
 
-/* EXERCISES */
+/* EXERCISES CONTAINER */
 .exercise-list {
     margin-top: 10px;
-    padding-top: 10px;
+    padding-top: 12px;
     border-top: 1px solid #e5e7eb;
 }
 
+/* EXERCISE ITEM */
 .exercise-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     font-size: 0.95rem;
 }
 
+/* Exercise name */
 .ex-name {
     font-weight: 600;
-    color: #374151;
+    color: #1f2937;
 }
 
+/* Reps / sets / duration */
 .ex-detail {
     color: #6b7280;
+}
+
+/* OPTIONAL: subtle hover for each exercise row */
+.exercise-item:hover {
+    color: #111827;
 }
