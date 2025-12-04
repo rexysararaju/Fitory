@@ -3,14 +3,19 @@ import { useNavigate, useLocation } from "react-router-dom";
 import API from "../api/api";
 import Navbar from "../components/Navbar";
 import "../styles/dashboard.css"; // ← 统一风格（原 workoutForm.css 可删）
+import "../styles/workoutForm.css";
 
 function WorkoutForm() {
     const navigate = useNavigate();
     const location = useLocation();
+    const prefillDate = location.state?.prefillDate || null;
 
     const [editingId, setEditingId] = useState(null);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [date, setDate] = useState(
+        prefillDate ? new Date(prefillDate).toISOString().split("T")[0] : ""
+    );
     const [exercises, setExercises] = useState([
         { name:"", type:"", sets:null, reps:null, weight:null, duration:null, distance:null, steps:null }
     ]);
@@ -37,7 +42,7 @@ function WorkoutForm() {
         try{
             const token=localStorage.getItem("token");
             const config={headers:{Authorization:`Bearer ${token}`}};
-            const payload={name,description,exercises};
+            const payload={name,description,exercises,date};
 
             editingId? await API.put(`/workouts/${editingId}`,payload,config)
                      : await API.post("/workouts",payload,config);
@@ -79,6 +84,18 @@ function WorkoutForm() {
                             <textarea className="input-field"
                                 value={description} onChange={e=>setDescription(e.target.value)} />
                         </div>
+                        {/* Workout Date (Auto-filled if opened from calendar) */}
+                        <label className="auth-label">
+                            Workout Date
+                            <input
+                                type="date"
+                                className="input-field"
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
+                                required
+                            />
+                        </label>
+
 
                         {/* EXERCISES */}
                         <h2 className="section-title" style={{marginTop:5}}>Exercises</h2>

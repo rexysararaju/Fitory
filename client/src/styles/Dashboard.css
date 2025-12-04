@@ -21,6 +21,19 @@
     height: 100vh;       
     display: flex;       /* 让内部的卡片能撑满 */
     flex-direction: column;
+    
+}
+.content-card::-webkit-scrollbar {
+    width: 10px;
+}
+
+.content-card::-webkit-scrollbar-thumb {
+    background: #c3c7ff;
+    border-radius: 8px;
+}
+
+.content-card::-webkit-scrollbar-thumb:hover {
+    background: #9fa4ff;
 }
 
 /* 3. 白色大圆角卡片 */
@@ -36,6 +49,91 @@
     position: relative; 
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
 }
+
+/*new*/
+.dashboard-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.dashboard-sub {
+    color:#6b7280;
+    margin-bottom:25px;
+}
+
+/* ========== Summary Stat Cards ========= */
+.stat-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.stat-card {
+    position:relative;
+    background:#fff;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 4px 16px rgba(0,0,0,.05);
+}
+
+.stat-card h2 { font-size:2rem; margin:0 }
+.stat-card p { margin:5px 0 10px; color:#374151 }
+.stat-footer { font-size:.8rem; color:#6b7280 }
+
+.stat-icon {
+    position:absolute; right:15px; bottom:15px;
+    background:#eef2ff; padding:10px; border-radius:12px;
+    font-size:1.3rem;
+}
+.stat-icon.blue { background:#eef2ff; color:#4f46e5 }
+.stat-icon.purple { background:#f3e8ff; color:#7c3aed }
+.stat-icon.green { background:#e3ffe8; color:#059669 }
+.stat-icon.pink { background:#ffe4fa; color:#db2777 }
+
+/* ========== Recent Workouts Section ========= */
+.section-heading { font-size:1.4rem; margin:15px 0 }
+.section-divider { margin:20px 0; opacity:.2 }
+
+.recent-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:22px;
+}
+
+.recent-card {
+    background:white;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+/* Exercise items inside card */
+.exercise-block {
+    background:#f6f8ff;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.row-btn {
+    display:flex;
+    gap:12px;
+    margin-top:12px;
+}
+
+.btn.edit { background:#eef2ff; color:#4f46e5 }
+.btn.delete { background:#4e498cff; color:white }
+.btn {
+    flex:1;
+    padding:10px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+}
+
 
 /* --- 下面是内容样式 --- */
 

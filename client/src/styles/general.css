@@ -45,6 +45,31 @@
     transition: 0.2s ease-in-out;
 }
 
+.delete-button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
+    background: #4e49cc;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.delete-confirm {
+    flex: 1;
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
+    background: #f87171;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+
 .btn-secondary {
     flex: 1;
     cursor: pointer;
@@ -56,11 +81,28 @@
 
 }
 
-   
-
 .btn-secondary:hover {
     background: #e0e7ff;
     transform: translateY(1.03);
     transition: 0.2s ease-in-out;
 }
+
+.notice-banner {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-weight: 600;
+    padding: 12px;
+    margin: 5px 0 15px;
+    border-radius: 10px;
+    animation: fadeIn .3s ease;
+}
+
+/* Smooth fade */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+
+
 

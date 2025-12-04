@@ -7,7 +7,7 @@ function CalendarView({ workouts, onDateChange }) {
     const [value, setValue] = useState(new Date());
 
     const workoutDates = workouts.map(w =>
-        new Date(w.createdAt).toDateString()
+        new Date(w.date).toDateString()
     );
 
     const tileContent = ({ date, view }) => {

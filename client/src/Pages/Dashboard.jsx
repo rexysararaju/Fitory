@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom"; 
 import API from "../api/api";
-import Navbar from "../components/Navbar"; // 1. 导入 Navbar 组件
-import "../styles/dashboard.css"; // 2. 导入上面写好的 CSS
+import Navbar from "../components/Navbar"; 
 import CalendarView from "../components/CalendarView";
+import "../styles/general.css"; 
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [selectedDate, setSelectedDate] = useState(null);
 
-    // Fetch logic... (保持不变)
+    // Fetch logic
     const fetchWorkouts = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -26,6 +26,27 @@ function Dashboard() {
             setLoading(false);
         }
     };  
+
+    function getStreak(workouts) {
+        if (workouts.length === 0) return 0;
+
+        // Extract unique workout dates in yyyy-mm-dd format
+        const dates = new Set(
+            workouts.map(w => new Date(w.date).toISOString().split("T")[0])
+        );
+
+        let streak = 0;
+        let current = new Date();
+
+        while (dates.has(current.toISOString().split("T")[0])) {
+            streak++;
+            current.setDate(current.getDate() - 1); // check previous day
+        }
+
+        return streak;
+    }
+
+    const streak = getStreak(workouts);
 
     const handleEdit = (workout) => {
         navigate("/create-workout", { state: { workoutToEdit: workout } });
@@ -53,90 +74,94 @@ function Dashboard() {
         : workouts;
 
     return (
-        // 1. 最外层布局容器：Flex Row
         <div className="dashboard-layout">
             
-            {/* 2. 左侧：复用 Navbar 组件 (现在它是侧边栏样式了) */}
             <Navbar />
 
-            {/* 3. 右侧：主要内容区域 */}
+            {/* 3. right side: main content */}
             <main className="main-content">
-                {/* 4. 白色大圆角卡片 */}
                 <div className="content-card">
                     
-                    {/* Header: Title + Record Button */}
-                    <div className="page-header-row">
-                        <h1 className="page-title">
-                             {selectedDate 
-                                ? selectedDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long' }) 
-                                : "My Workout Log"}
-                        </h1>
-                        {/* 把Record按钮移到这里，符合图片设计 */}
-                        <Link to="/create-workout" className="btn-record">
-                            + Record Workout
-                        </Link>
+                                    {/* =================== HERO HEADER =================== */}
+                <h1 className="dashboard-title">My Workout Log</h1>
+                
+                <p className="dashboard-sub">Track your fitness journey and stay consistent!</p>
+                
+
+                {/* =================== SUMMARY CARDS =================== */}
+                <div className="stat-grid">
+                    <div className="stat-card">
+                        <h2>{workouts.length}</h2>
+                        <p>Total Workouts</p>
+                        <div className="stat-icon blue">🏋</div>
                     </div>
 
-                    {!loading && (
-                        <div style={{marginBottom: '30px'}}>
-                            <CalendarView
-                                workouts={workouts}
-                                onDateChange={setSelectedDate}
-                            />
-                        </div>
-                    )}
-
-                    <div className="section-header">
-                        <h2 className="section-title">
-                            {selectedDate
-                                ? `Workouts on ${selectedDate.toLocaleDateString()}`
-                                : "All History"}
-                        </h2>
-                        {selectedDate && (
-                            <button className="btn-show-all" onClick={() => setSelectedDate(null)}>
-                                Show All
-                            </button>
-                        )}
+                    <div className="stat-card">
+                        <h2>{workouts.filter(w => 
+                            new Date(w.date) > new Date().setDate(new Date().getDate()-7)
+                        ).length}</h2>
+                        <p>This Week</p>
+                        <div className="stat-icon purple">📅</div>
                     </div>
-
-                    {loading ? (
-                        <p>Loading...</p>
-                    ) : filteredWorkouts.length === 0 ? (
-                        <div className="empty-state">
-                            <p>{selectedDate ? "No workouts found on this day." : "No workouts recorded yet."}</p>
-                        </div>
-                    ) : (
-                        <div className="workout-grid">
-                            {filteredWorkouts.map((w) => (
-                                <div key={w._id} className="workout-card">
-                                    <div className="card-header">
-                                        <h3>{w.name}</h3>
-                                        <span className="workout-date">{new Date(w.date).toLocaleDateString()}</span>
-                                    </div>
-                                    {w.description && <p className="workout-desc">{w.description}</p>}
-                                    <div className="exercise-list">
-                                        {w.exercises.map((ex, idx) => (
-                                            <div key={idx} className="exercise-item">
-                                                <span className="ex-name">{ex.name}</span>
-                                                <span className="ex-detail">
-                                                    {ex.sets && `${ex.sets}x${ex.reps}`}
-                                                    {ex.weight && ` (${ex.weight}kg)`}
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="card-actions" style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
-                                        <button onClick={() => handleEdit(w)} 
-                                            className="btn-secondary"//style={{flex:1, cursor:'pointer', padding:'8px', color:'black', border:'none', borderRadius:'30px'}}
-                                            >Edit</button>
-                                        <button onClick={() => handleDelete(w._id)} 
-                                            className="delete-button"//style={{flex:1, cursor:'pointer', padding:'8px', background:'#4e498cff', color:'white', border:'none', borderRadius:'30px'}}
-                                            >Delete</button>
-                                    </div>
+                    
+                    <div className="stat-card">
+                        <h2>{
+                            workouts.reduce((sum,w) => sum + w.exercises.length,0)
+                        }</h2>
+                        <p>Total Exercises</p>
+                        <div className="stat-icon green">📈</div>
+                    </div>
+                    
+                    <div className="stat-card">
+                        <h2>{streak} days</h2>
+                        <p>Current Streak 🔥</p>
+                        <div className="stat-icon pink">⚡</div>
+                    </div>
+                </div>
+                                    
+                <hr className="section-divider"/>
+                                    
+                <h2 className="section-heading">Recent Workouts</h2>
+                                    
+                {/* =================== Recent Workout Cards =================== */}
+                <div className="recent-grid">
+                {filteredWorkouts.slice(0,3).map(w => (
+                    <div key={w._id} className="recent-card">
+                    
+                        <h3>{w.name}</h3>
+                
+                        <p className="date">
+                            📅 {new Date(w.date).toLocaleDateString()}
+                        </p>
+                
+                        <p className="desc">{w.description}</p>
+                
+                        <div className="exercise-list">
+                            {w.exercises.map(ex => (
+                                <div className="exercise-block" key={ex.name}>
+                                    <span>🔵 {ex.name}</span>
+                                    <p className="muted">
+                                        {ex.sets && `${ex.sets}×${ex.reps} reps @ ${ex.weight}kg`}
+                                        {ex.duration && `${ex.duration} min`}
+                                        {ex.steps && `${ex.steps} steps`}
+                                        {ex.distance && `${ex.distance} km`}
+                                    </p>
                                 </div>
                             ))}
                         </div>
-                    )}
+                        
+                        <div className="row-btn">
+                            <button className="btn edit"
+                                onClick={() => handleEdit(w)}
+                            >Edit</button>
+                            <button className="btn delete"
+                                onClick={() => handleDelete(w._id)}
+                            >Delete</button>
+                        </div>
+                    </div>
+                ))}
+                </div>
+                
                 </div>
             </main>
         </div>
