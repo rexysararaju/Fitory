@@ -56,10 +56,11 @@
 
 /* SELECTED DATE */
 .react-calendar__tile--active {
-  background: #3b82f6 !important; /* clean blue */
-  color: white !important;
+  background: #e0e7ff !important; /* clean blue */
+  color: black !important;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 10px;
+  
 }
 
 /* DOT INDICATOR */
