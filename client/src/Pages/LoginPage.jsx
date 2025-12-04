@@ -23,9 +23,9 @@ function LoginPage() {
 
       navigate("/dashboard");
     } catch (err) {
-      const msg = err.response?.data?.message || "Login failed";
-      setError(msg);
-      alert(msg);
+    const msg = err.response?.data?.message || "Login failed";
+    setError(msg);
+
     }
   };
 
@@ -100,7 +100,12 @@ function LoginPage() {
                 />
               </label>
 
-              {error && <p className="auth-error">{error}</p>}
+              {error && (
+                <div className="auth-notice error">
+                  {error}
+                </div>
+              )}              
+
 
               <button className="auth-button" type="submit">
                 Login
