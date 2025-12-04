@@ -1,170 +1,164 @@
-/*********************************************
-   DASHBOARD — CLEAN MODERN FITNESS UI
-**********************************************/
+/* src/styles/dashboard.css */
 
-/* OUTER BACKGROUND */
-.dashboard-bg {
-  background-color: #f0f2f5; /* soft neutral */
-  min-height: 100vh;
-  padding-bottom: 40px;
+/* !!! 核心修复：防止 Padding 把页面撑爆 !!! */
+* {
+    box-sizing: border-box; 
 }
 
-/* PAGE CONTAINER */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 28px 20px;
+/* 1. 页面整体布局 */
+.dashboard-layout {
+    display: flex;       
+    width: 100%;
+    height: 100vh;       /* 强制固定为屏幕高度，不准溢出 */
+    background: linear-gradient(135deg, #02021a 0%, #000046 100%); 
+    overflow: hidden;    /* 禁止整个页面出现双滚动条 */
 }
 
-/* PAGE TITLE */
+/* 2. 右侧内容区域容器 */
+.main-content {
+    flex: 1;             
+    padding: 15px;       /* 减小这里的 Padding，留出空隙给圆角，但不要太大 */
+    height: 100vh;       
+    display: flex;       /* 让内部的卡片能撑满 */
+    flex-direction: column;
+}
+
+/* 3. 白色大圆角卡片 */
+.content-card {
+    background-color: #ffffff;
+    flex: 1;             /* 自动占满 main-content 的剩余空间 */
+    width: 100%;
+    border-radius: 24px; /* 圆角稍微收一点，看起来更现代 */
+    padding: 30px;       /* 内部内容不要太拥挤 */
+    overflow-y: auto;    /* 只有白色卡片内部滚动 */
+    
+    /* 修复圆角被吞掉的问题：确保它不超出父容器 */
+    position: relative; 
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* --- 下面是内容样式 --- */
+
+.page-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .page-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-top: 10px;
+    font-size: 1.5rem; /* 调小标题 */
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
 }
 
-/* SECTION TITLE */
+.btn-record {
+    text-decoration: none;
+    color: #4f46e5;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    background: #eef2ff;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+.btn-record:hover {
+    background: #e0e7ff;
+}
+
+/* Section 标题 */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
 .section-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #374151;
 }
 
-/* EMPTY STATE */
-.empty-state {
-  margin-top: 40px;
-  padding: 40px;
-  background: #f3f4f6;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  text-align: center;
-  color: #6b7280;
-  font-size: 1.05rem;
+.btn-show-all {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #6b7280;
 }
 
-/* GRID LAYOUT */
+/* Grid 布局 */
 .workout-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  gap: 24px;
-  margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 卡片最小宽度调小，排版更紧凑 */
+    gap: 20px;
+    padding-bottom: 20px; /* 防止最后一张卡片贴底 */
 }
 
-/* CARD */
 .workout-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 20px 24px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: transform 0.1s ease, box-shadow 0.2s ease;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .workout-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 16px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: #e5e7eb;
 }
 
-/* CARD HEADER */
 .card-header h3 {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #111827;
+    font-size: 1.1rem;
+    margin: 0 0 5px 0;
+    color: #111827;
 }
 
-/* DATE */
 .workout-date {
-  font-size: 0.9rem;
-  color: #6b7280;
-  margin-top: 2px;
+    font-size: 0.8rem;
+    color: #9ca3af;
 }
 
-/* DESCRIPTION */
 .workout-desc {
-  margin: 12px 0 16px 0;
-  color: #4b5563;
-  font-size: 0.95rem;
-  line-height: 1.4;
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin: 10px 0;
+    line-height: 1.4;
 }
 
-/* EXERCISES */
-.exercise-list {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
-}
-
-.exercise-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-  font-size: 0.92rem;
-}
-
-.ex-name {
-  font-weight: 600;
-  color: #374151;
-}
-
-.ex-detail {
-  color: #6b7280;
-}
-
-/* DELETE BUTTON */
-.btn-delete {
-  width: 100%;
-  padding: 10px;
-  margin-top: 18px;
-
-  background-color: #fdf2f2;
-  border: 1px solid #e5b8b8;
-  color: #b45353;
-
-  border-radius: 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.btn-delete:hover {
-  background-color: #fce7e7;
-}
-
-/* SHOW ALL BUTTON */
-.btn-show-all {
-  padding: 8px 14px;
-  background: #4b5563; /* neutral slate */
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.2s ease;
-}
-
-.btn-show-all:hover {
-  background: #374151;
-}
-
-/* SECTION HEADER */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 28px;
-  margin-bottom: 14px;
-}
-
-/* RESPONSIVE */
+/* 手机端适配 */
 @media (max-width: 768px) {
-  .page-title {
-    text-align: left;
-  }
-
-  .workout-card {
-    padding: 18px;
-  }
+    .dashboard-layout {
+        flex-direction: column;
+        height: auto;
+        overflow-y: auto;
+    }
+    .sidebar-container {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+    }
+    .sidebar-links {
+        display: none; /* 暂时隐藏菜单 */
+    }
+    .main-content {
+        padding: 0;
+        height: auto;
+    }
+    .content-card {
+        border-radius: 20px 20px 0 0;
+        min-height: calc(100vh - 70px);
+    }
 }

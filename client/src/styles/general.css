@@ -1,0 +1,66 @@
+.pro-button {
+  margin-top: 8px;
+  width: 100%;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f9fafb;
+  background: linear-gradient(135deg, #020617, #111827 60%, #312e81);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease,
+    filter 0.12s ease;
+  box-shadow:
+    0 15px 36px rgba(15, 23, 42, 0.7),
+    0 0 0 1px rgba(15, 23, 42, 0.7);
+}
+
+.edit-button {
+    flex:1; 
+    cursor:pointer;
+    padding:8px; 
+    color:black; 
+    border:none; 
+    border-radius:30px;
+}
+
+.delete-button {
+    flex: 1;
+    cursor: pointer;
+    padding: 8px; 
+    color: white; 
+    border: none; 
+    border-radius: 30px;
+    background: #4e498cff;
+
+}
+
+.delete-button:hover {
+    background: #3c379aff;
+    transform: scale(1.03);
+    transition: 0.2s ease-in-out;
+}
+
+.btn-secondary {
+    flex: 1;
+    cursor: pointer;
+    padding: 8px; 
+    color: #4f46e5; 
+    border: none; 
+    border-radius: 30px;
+    background: #eef2ff;
+
+}
+
+   
+
+.btn-secondary:hover {
+    background: #e0e7ff;
+    transform: translateY(1.03);
+    transition: 0.2s ease-in-out;
+}
+
