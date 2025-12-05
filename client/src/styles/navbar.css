@@ -1,33 +1,33 @@
 /* src/styles/navbar.css */
 
-/* 1. 侧边栏容器 */
+
 .sidebar-container {
-    width: 240px;          /* 把宽度从 260 改为 240，显得更精致 */
+    width: 240px;         
     height: 100vh;         
     background: #050511;   
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
-    padding: 30px 20px;    /* 减小内边距，防止内容太大 */
+    padding: 30px 20px;    
     position: sticky;      
     top: 0;
     flex-shrink: 0;        
-    /* border-right: 1px solid #1f1f2e;  <-- 删除这一行，去掉中间的线 */
-    box-sizing: border-box; /* 关键：防止 padding 把宽度撑大 */
+
+    box-sizing: border-box; 
 }
 
-/* 2. Logo 区域 */
+/* 2. Logo */
 .sidebar-logo {
     display: flex;
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    margin-bottom: 40px; /* 减小间距 */
+    margin-bottom: 40px; 
     color: white;
 }
 
 .logo-text {
-    font-size: 1.3rem;   /* 稍微调小字体 */
+    font-size: 1.3rem;  
     font-weight: 800;
     letter-spacing: 1px;
 }
@@ -38,40 +38,38 @@
     border-radius: 50%;
 }
 
-/* 3. 链接区域 */
+/* 3. Links */
 .sidebar-links {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* 减小菜单间距 */
+    gap: 15px; 
 }
 
-/* 单个链接样式 */
+
 .nav-item {
     color: #a0a0b0;        
     text-decoration: none;
-    font-size: 0.95rem;    /* 字体改小，更显精致 */
+    font-size: 0.95rem;    
     font-weight: 500;
     transition: all 0.3s ease;
-    padding: 10px 15px;    /* 增加点击区域，但减小视觉占用 */
-    border-radius: 8px;    /* 增加一点圆角悬停效果 */
+    padding: 10px 15px;    
+    border-radius: 8px;   
     display: block;
 }
 
-/* 鼠标悬停 */
 .nav-item:hover {
     color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.05); /* 悬停时加一点淡淡的背景 */
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* 当前激活页面的样式 */
 .nav-item.active {
     color: #ffffff;
     font-weight: 700;
-    background:linear-gradient(135deg, #020617, #0f3483 60%, #5853e0);  /* 选中状态直接变紫色背景，类似图中的按钮感 */
+    background:linear-gradient(135deg, #020617, #0f3483 60%, #5853e0);  
     box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
 }
 
-/* Logout 按钮 */
+/* Logout button */
 .sidebar-bottom {
     margin-top: auto;
 }

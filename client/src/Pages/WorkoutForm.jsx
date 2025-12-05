@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import API from "../api/api";
 import Navbar from "../components/Navbar";
-import "../styles/Dashboard.css"; // ← 统一风格（原 workoutForm.css 可删）
+import "../styles/Dashboard.css"; 
 import "../styles/workoutForm.css";
 
 function WorkoutForm() {
