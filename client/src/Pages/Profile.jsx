@@ -1,13 +1,15 @@
+// src/pages/Profile.jsx
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import API from '../api/api';
-import '../styles/dashboard.css';
+import '../styles/dashboard.css'; // ← 样式与 Dashboard 统一
+import '../styles/general.css';
+
 
 function Profile() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // State for Edit Mode
     const [isEditing, setIsEditing] = useState(false);
     const [editName, setEditName] = useState("");
     const [editEmail, setEditEmail] = useState("");
@@ -47,141 +49,91 @@ function Profile() {
             setIsEditing(false);
             alert("Profile updated successfully!");
         } catch (err) {
-            console.error(err);
             alert("Failed to update profile");
         }
     };
 
-    if (loading) return <div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>;
-
     return (
-        <div className="dashboard-bg">
+        <div className="dashboard-layout">
+
+            {/* 侧边栏一致 */}
             <Navbar />
-            <div className="container">
-                <h1 className="page-title">My Profile</h1>
 
-                {user ? (
-                    <div className="workout-card" style={{ maxWidth: '600px', margin: '0 auto', paddingBottom: '20px' }}>
-                        <div className="card-header">
-                            <h3>User Information</h3>
-                        </div>
+            {/* ⚡ 主体布局与 Dashboard 完全保持一致 */}
+            <main className="main-content">
+                <div className="content-card">
 
-                        <div className="exercise-list" style={{ padding: '20px' }}>
-                            {/* Name Field */}
-                            <div className="exercise-item" style={{ alignItems: 'center' }}>
-                                <span className="ex-name" style={{ minWidth: '80px', fontWeight: 'bold' }}>Name:</span>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        value={editName}
-                                        onChange={(e) => setEditName(e.target.value)}
-                                        className="input-field"
-                                        style={{ flex: 1, padding: '8px', margin: 0 }}
-                                    />
-                                ) : (
-                                    <span className="ex-detail" style={{ flex: 1 }}>{user.name}</span>
-                                )}
-                            </div>
-
-                            {/* Email Field */}
-                            <div className="exercise-item" style={{ alignItems: 'center', marginTop: '10px' }}>
-                                <span className="ex-name" style={{ minWidth: '80px', fontWeight: 'bold' }}>Email:</span>
-                                {isEditing ? (
-                                    <input
-                                        type="email"
-                                        value={editEmail}
-                                        onChange={(e) => setEditEmail(e.target.value)}
-                                        className="input-field"
-                                        style={{ flex: 1, padding: '8px', margin: 0 }}
-                                    />
-                                ) : (
-                                    <span className="ex-detail" style={{ flex: 1 }}>{user.email}</span>
-                                )}
-                            </div>
-
-                            {/* Role (Read-only) */}
-                            <div className="exercise-item" style={{ marginTop: '10px' }}>
-                                <span className="ex-name" style={{ minWidth: '80px', fontWeight: 'bold' }}>Role:</span>
-                                <span className="ex-detail" style={{ flex: 1 }}>Member</span>
-                            </div>
-
-                            {/* Joined Date (Read-only) */}
-                            <div className="exercise-item" style={{ marginTop: '10px' }}>
-                                <span className="ex-name" style={{ minWidth: '80px', fontWeight: 'bold' }}>Joined:</span>
-                                <span className="ex-detail" style={{ flex: 1 }}>
-                                    {new Date(user.createdAt).toLocaleDateString()}
-                                </span>
-                            </div>
-                        </div>
-
-                        {/* Buttons */}
-                        <div className="card-actions" style={{ padding: '20px 20px 0', borderTop: '1px solid #eee', display: 'flex', justifyContent: 'center', gap: '15px' }}>
-                            {isEditing ? (
-                                <>
-                                    {/* Save Button (Green) */}
-                                    <button
-                                        onClick={handleUpdate}
-                                        style={{
-                                            padding: '10px 20px',
-                                            backgroundColor: '#4CAF50',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '6px',
-                                            fontWeight: 'bold',
-                                            cursor: 'pointer',
-                                            minWidth: '100px',
-                                            flex: 1
-                                        }}
-                                    >
-                                        Save Changes
-                                    </button>
-
-                                    {/* Cancel Button (Red) */}
-                                    <button
-                                        onClick={() => {
-                                            setIsEditing(false);
-                                            setEditName(user.name);
-                                            setEditEmail(user.email);
-                                        }}
-                                        style={{
-                                            padding: '10px 20px',
-                                            backgroundColor: '#f44336',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '6px',
-                                            fontWeight: 'bold',
-                                            cursor: 'pointer',
-                                            minWidth: '100px',
-                                            flex: 1
-                                        }}
-                                    >
-                                        Cancel
-                                    </button>
-                                </>
-                            ) : (
-                                /* Edit Profile Button (Blue Theme) */
-                                <button
-                                    onClick={() => setIsEditing(true)}
-                                    style={{
-                                        padding: '10px 20px',
-                                        backgroundColor: '#3b82f6',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '6px',
-                                        fontWeight: 'bold',
-                                        cursor: 'pointer',
-                                        width: '100%'
-                                    }}
-                                >
-                                    Edit Profile
-                                </button>
-                            )}
-                        </div>
+                    {/* Header */}
+                    <div className="page-header-row">
+                        <h1 className="page-title">My Profile</h1>
                     </div>
-                ) : (
-                    <p style={{ textAlign: 'center' }}>Failed to load profile.</p>
-                )}
-            </div>
+
+                    {loading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+
+                            <div className="section-header" style={{ marginTop: 0 }}>
+                                <h2 className="section-title">Account Details</h2>
+                            </div>
+
+                            {/* 信息输入区 */}
+                            <div className="workout-card" style={{ padding: 20 }}>
+
+                                {/* Name */}
+                                <div className="exercise-item" style={{ marginBottom: 12 }}>
+                                    <span className="ex-name" style={{ minWidth: 80 }}>Name:</span>
+                                    {isEditing ? (
+                                        <input 
+                                            value={editName} 
+                                            onChange={(e)=>setEditName(e.target.value)}
+                                            style={{ flex:1, padding:8,border: '1px solid #ddd', borderRadius:6 }}
+                                        />
+                                    ) : (<span className="ex-detail">{user.name}</span>)}
+                                </div>
+
+                                {/* Email */}
+                                <div className="exercise-item" style={{ marginBottom: 12 }}>
+                                    <span className="ex-name" style={{ minWidth: 80 }}>Email:</span>
+                                    {isEditing ? (
+                                        <input 
+                                            value={editEmail} 
+                                            onChange={(e)=>setEditEmail(e.target.value)}
+                                            style={{ flex:1,padding:8,border:'1px solid #ddd',borderRadius:6 }}
+                                        />
+                                    ) : (<span className="ex-detail">{user.email}</span>)}
+                                </div>
+
+                                {/* Role + Joined */}
+                                <div className="exercise-item"><span className="ex-name">Role:</span><span className="ex-detail">Member</span></div>
+                                <div className="exercise-item"><span className="ex-name">Joined:</span><span className="ex-detail">{new Date(user.createdAt).toLocaleDateString()}</span></div>
+
+                                {/* 按钮 */}
+                                <div className="card-actions" style={{ marginTop:20, display:'flex', gap:10 }}>
+                                    {isEditing ? (
+                                        <>
+                                            <button 
+                                                style={{flex:1, padding:10, color:'black',borderRadius:30}}
+                                                onClick={handleUpdate}
+                                            >Save</button>
+                                            <button 
+                                                style={{flex:1, padding:10, background:'#4e498cff',color:'#fff',borderRadius:30}}
+                                                onClick={()=>{setIsEditing(false); setEditName(user.name); setEditEmail(user.email);}}
+                                            >Cancel</button>
+                                        </>
+                                    ) : (
+                                        <button className="pro-button"
+                                            //style={{width:'100%', padding:12, background:'#4e498cff',color:'#fff',borderRadius:6}}
+                                            onClick={()=>setIsEditing(true)}
+                                        >Edit Profile</button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                </div>
+            </main>
         </div>
     );
 }
