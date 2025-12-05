@@ -1,123 +1,144 @@
-/* ==== Workout Form Modern UI ==== */
+/* ============================================
+   WORKOUT FORM — CLASSY MODERN THEME (2025)
+   ============================================ */
 
+/* Page Wrapper */
 .form-container {
-    max-width: 850px;
-    margin: auto;
-    padding: 30px;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 32px;
 }
 
-/* Title spacing */
+/* Title */
 .page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 25px;
-    color: #111827;
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
 }
 
-/* --- CARD WRAPPER FOR THE FORM --- */
+/* Main Form Card */
 form {
-    background: #ffffff;
-    padding: 32px;
-    border-radius: 22px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.07);
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
+  background: #ffffff;
+  padding: 36px;
+  border-radius: 26px;
+  border: 1px solid #eef0f5;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  transition: 0.3s ease;
 }
 
-/* FIELD TITLE */
+form:hover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Section Title */
 .section-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: #111;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #1e293b;
+  letter-spacing: -0.3px;
 }
 
-/* INPUT + TEXTAREA */
-.input-field, textarea, select {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 12px;
-    border: 1.5px solid #d1d5db;
-    font-size: 0.95rem;
-    outline: none;
-    transition: .25s;
-    background: #fafafa;
+/* Input + Textarea + Select */
+.input-field,
+textarea,
+select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1.8px solid #d7dce6;
+  background: #f8f9fc;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+  outline: none;
+  transition: 0.25s;
 }
 
 .input-field:focus,
 textarea:focus,
 select:focus {
-    border-color: #6366f1;
-    box-shadow: 0 0 0 3px rgba(99,102,241,.25);
-    background: white;
+  border-color: #6366f1;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18);
 }
 
-/* ---- EXERCISE BLOCK CARD ---- */
+/* Exercise Card */
 .exercise-input-group {
-    background: #f9fafb;
-    padding: 20px;
-    border-radius: 18px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-    transition: .3s;
+  background: #fdfdfd;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid #e5e8ef;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+  transition: 0.25s ease;
 }
+
 .exercise-input-group:hover {
-    transform: scale(1.01);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.07);
 }
 
-/* SIDE BY SIDE SETS-REPS-WEIGHT */
+/* Row Layout — Sets/Reps/Weight */
 .ex-row-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
-    gap: 12px;
-    margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+  margin-top: 12px;
 }
 
-/* ---- BUTTON STYLING ---- */
-
+/* Primary Button */
 .btn-primary {
-    background: linear-gradient(135deg,#6366f1,#4f46e5);
-    color: white;
-    border: none;
-    padding: 14px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 14px;
-    transition: .25s;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  padding: 15px;
+  font-size: 1.05rem;
+  border-radius: 14px;
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: 0.25s;
 }
+
 .btn-primary:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
+  transform: translateY(-3px);
+  filter: brightness(1.12);
 }
 
+/* Secondary Button */
 .btn-secondary {
-    background: #eef2ff;
-    color: #4f46e5;
-    font-weight: 600;
-    padding: 14px;
-    border-radius: 14px;
-    transition: .2s;
-    border: none;
-}
-.btn-secondary:hover {
-    background: #e0e7ff;
-    transform: translateY(-2px);
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 600;
+  padding: 15px;
+  border-radius: 14px;
+  border: none;
+  transition: 0.25s;
 }
 
-/* DELETE BUTTON */
-.btn-delete {
-    background: #fee2e2;
-    color: #dc2626;
-    font-size: 0.9rem;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    border-radius: 12px;
-    transition: .2s;
-    margin-top: 8px;
+.btn-secondary:hover {
+  background: #e0e7ff;
+  transform: translateY(-3px);
 }
+
+/* Delete Button */
+.btn-delete {
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 0.95rem;
+  border: none;
+  padding: 11px;
+  border-radius: 12px;
+  width: 100%;
+  transition: 0.25s;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
 .btn-delete:hover {
-    background: #fecaca;
-    transform: translateY(-2px);
+  background: #fecaca;
+  transform: translateY(-3px);
 }

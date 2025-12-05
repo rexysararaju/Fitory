@@ -7,6 +7,8 @@ import HistoryPage from "./Pages/HistoryPage";
 import ProgressPage from "./Pages/ProgressPage";
 import Users from "./Pages/Users";
 import Profile from "./Pages/Profile";
+import "./styles/responsive.css";
+
 
 function App() {
   return (

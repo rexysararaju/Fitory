@@ -1,7 +1,9 @@
-// src/pages/Profile.jsx
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import API from '../api/api';
+import "../styles/general.css";
+import "../styles/Dashboard.css";
+import { LuUser, LuMail, LuCalendar, LuShield } from "react-icons/lu";
 import '../styles/Dashboard.css'; // ← 样式与 Dashboard 统一
 import '../styles/general.css';
 
@@ -55,79 +57,98 @@ function Profile() {
 
     return (
         <div className="dashboard-layout">
-
-            {/* 侧边栏一致 */}
             <Navbar />
 
-            {/* ⚡ 主体布局与 Dashboard 完全保持一致 */}
             <main className="main-content">
                 <div className="content-card">
 
-                    {/* Header */}
-                    <div className="page-header-row">
+                    {/* Page Header */}
+                    <div className="profile-header">
                         <h1 className="page-title">My Profile</h1>
                     </div>
 
                     {loading ? (
                         <p>Loading...</p>
                     ) : (
-                        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+                        <div className="profile-container">
 
-                            <div className="section-header" style={{ marginTop: 0 }}>
-                                <h2 className="section-title">Account Details</h2>
+                            {/* Avatar */}
+                            <div className="profile-avatar">
+                                {user.name?.charAt(0)}
                             </div>
 
-                            {/* 信息输入区 */}
-                            <div className="workout-card" style={{ padding: 20 }}>
+                            {/* Card */}
+                            <div className="profile-card">
 
                                 {/* Name */}
-                                <div className="exercise-item" style={{ marginBottom: 12 }}>
-                                    <span className="ex-name" style={{ minWidth: 80 }}>Name:</span>
+                                <div className="profile-row">
+                                    <LuUser className="profile-icon" />
+                                    <label>Name</label>
+
                                     {isEditing ? (
-                                        <input 
-                                            value={editName} 
-                                            onChange={(e)=>setEditName(e.target.value)}
-                                            style={{ flex:1, padding:8,border: '1px solid #ddd', borderRadius:6 }}
+                                        <input
+                                            value={editName}
+                                            onChange={(e) => setEditName(e.target.value)}
+                                            className="profile-input"
                                         />
-                                    ) : (<span className="ex-detail">{user.name}</span>)}
+                                    ) : (
+                                        <span>{user.name}</span>
+                                    )}
                                 </div>
 
                                 {/* Email */}
-                                <div className="exercise-item" style={{ marginBottom: 12 }}>
-                                    <span className="ex-name" style={{ minWidth: 80 }}>Email:</span>
+                                <div className="profile-row">
+                                    <LuMail className="profile-icon" />
+                                    <label>Email</label>
+
                                     {isEditing ? (
-                                        <input 
-                                            value={editEmail} 
-                                            onChange={(e)=>setEditEmail(e.target.value)}
-                                            style={{ flex:1,padding:8,border:'1px solid #ddd',borderRadius:6 }}
+                                        <input
+                                            value={editEmail}
+                                            onChange={(e) => setEditEmail(e.target.value)}
+                                            className="profile-input"
                                         />
-                                    ) : (<span className="ex-detail">{user.email}</span>)}
-                                </div>
-
-                                {/* Role + Joined */}
-                                <div className="exercise-item"><span className="ex-name">Role:</span><span className="ex-detail">Member</span></div>
-                                <div className="exercise-item"><span className="ex-name">Joined:</span><span className="ex-detail">{new Date(user.createdAt).toLocaleDateString()}</span></div>
-
-                                {/* 按钮 */}
-                                <div className="card-actions" style={{ marginTop:20, display:'flex', gap:10 }}>
-                                    {isEditing ? (
-                                        <>
-                                            <button 
-                                                style={{flex:1, padding:10, color:'black',borderRadius:30}}
-                                                onClick={handleUpdate}
-                                            >Save</button>
-                                            <button 
-                                                style={{flex:1, padding:10, background:'#4e498cff',color:'#fff',borderRadius:30}}
-                                                onClick={()=>{setIsEditing(false); setEditName(user.name); setEditEmail(user.email);}}
-                                            >Cancel</button>
-                                        </>
                                     ) : (
-                                        <button className="pro-button"
-                                            //style={{width:'100%', padding:12, background:'#4e498cff',color:'#fff',borderRadius:6}}
-                                            onClick={()=>setIsEditing(true)}
-                                        >Edit Profile</button>
+                                        <span>{user.email}</span>
                                     )}
                                 </div>
+
+                                {/* Role */}
+                                <div className="profile-row">
+                                    <LuShield className="profile-icon" />
+                                    <label>Role</label>
+                                    <span>Member</span>
+                                </div>
+
+                                {/* Join Date */}
+                                <div className="profile-row">
+                                    <LuCalendar className="profile-icon" />
+                                    <label>Joined</label>
+                                    <span>{new Date(user.createdAt).toLocaleDateString()}</span>
+                                </div>
+
+                                {/* BUTTONS */}
+                                <div className="profile-actions">
+                                    {isEditing ? (
+                                        <>
+                                            <button className="save-btn" onClick={handleUpdate}>Save</button>
+                                            <button 
+                                                className="cancel-btn"
+                                                onClick={() => {
+                                                    setIsEditing(false);
+                                                    setEditName(user.name);
+                                                    setEditEmail(user.email);
+                                                }}
+                                            >
+                                                Cancel
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <button className="edit-btn" onClick={() => setIsEditing(true)}>
+                                            Edit Profile
+                                        </button>
+                                    )}
+                                </div>
+
                             </div>
                         </div>
                     )}
