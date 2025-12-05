@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import API from "../api/api";
 import Navbar from "../components/Navbar";
-import "../styles/Dashboard.css"; // ← 统一引用 Dashboard 样式
+import "../styles/Dashboard.css"; 
 
 import {
   LineChart,

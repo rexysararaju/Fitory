@@ -1,25 +1,24 @@
 /* src/styles/dashboard.css */
 
-/* !!! 核心修复：防止 Padding 把页面撑爆 !!! */
+
 * {
     box-sizing: border-box; 
 }
 
-/* 1. 页面整体布局 */
+
 .dashboard-layout {
     display: flex;       
     width: 100%;
-    height: 100vh;       /* 强制固定为屏幕高度，不准溢出 */
+    height: 100vh;      
     background: linear-gradient(135deg, #02021a 0%, #000046 100%); 
-    overflow: hidden;    /* 禁止整个页面出现双滚动条 */
+    overflow: hidden;    
 }
 
-/* 2. 右侧内容区域容器 */
 .main-content {
     flex: 1;             
-    padding: 15px;       /* 减小这里的 Padding，留出空隙给圆角，但不要太大 */
+    padding: 15px;       
     height: 100vh;       
-    display: flex;       /* 让内部的卡片能撑满 */
+    display: flex;       
     flex-direction: column;
     
 }
@@ -36,16 +35,16 @@
     background: #9fa4ff;
 }
 
-/* 3. 白色大圆角卡片 */
+
 .content-card {
     background-color: #ffffff;
-    flex: 1;             /* 自动占满 main-content 的剩余空间 */
+    flex: 1;             
     width: 100%;
-    border-radius: 24px; /* 圆角稍微收一点，看起来更现代 */
-    padding: 30px;       /* 内部内容不要太拥挤 */
-    overflow-y: auto;    /* 只有白色卡片内部滚动 */
+    border-radius: 24px; 
+    padding: 30px;       
+    overflow-y: auto;    
     
-    /* 修复圆角被吞掉的问题：确保它不超出父容器 */
+ 
     position: relative; 
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
 }
@@ -58,7 +57,7 @@
 }
 
 .dashboard-sub {
-    color:#6b7280;
+    color:#71173b;
     margin-bottom:25px;
 }
 
@@ -135,7 +134,7 @@
 }
 
 
-/* --- 下面是内容样式 --- */
+
 
 .page-header-row {
     display: flex;
@@ -145,7 +144,7 @@
 }
 
 .page-title {
-    font-size: 1.5rem; /* 调小标题 */
+    font-size: 1.5rem; 
     font-weight: 700;
     color: #1f2937;
     margin: 0;
@@ -165,7 +164,7 @@
     background: #e0e7ff;
 }
 
-/* Section 标题 */
+/* Section */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -192,12 +191,12 @@
     color: #6b7280;
 }
 
-/* Grid 布局 */
+
 .workout-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 卡片最小宽度调小，排版更紧凑 */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
     gap: 20px;
-    padding-bottom: 20px; /* 防止最后一张卡片贴底 */
+    padding-bottom: 20px; 
 }
 
 .workout-card {
@@ -233,7 +232,7 @@
     line-height: 1.4;
 }
 
-/* 手机端适配 */
+/* Mobile responsiveness */
 @media (max-width: 768px) {
     .dashboard-layout {
         flex-direction: column;
@@ -249,7 +248,7 @@
         position: relative;
     }
     .sidebar-links {
-        display: none; /* 暂时隐藏菜单 */
+        display: none; 
     }
     .main-content {
         padding: 0;
