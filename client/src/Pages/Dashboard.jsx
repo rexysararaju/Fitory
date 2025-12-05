@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom"; 
 import API from "../api/api";
 import Navbar from "../components/Navbar"; 
-import CalendarView from "../components/CalendarView";
 import "../styles/general.css"; 
 
 function Dashboard() {
@@ -83,9 +82,19 @@ function Dashboard() {
                 <div className="content-card">
                     
                                     {/* =================== HERO HEADER =================== */}
+                <div className="dashboard-header">
                 <h1 className="dashboard-title">My Workout Log</h1>
-                
-                <p className="dashboard-sub">Track your fitness journey and stay consistent!</p>
+
+                <button 
+                    className="record-btn"
+                    onClick={() => navigate("/create-workout")}
+                >
+                    + Record Workout
+                </button>
+             </div>
+
+        <p className="dashboard-sub">Track your fitness journey and stay consistent!</p>
+
                 
 
                 {/* =================== SUMMARY CARDS =================== */}

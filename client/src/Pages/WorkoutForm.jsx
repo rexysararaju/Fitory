@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import API from "../api/api";
 import Navbar from "../components/Navbar";
-import "../styles/dashboard.css";
+import "../styles/Dashboard.css"; // ← 统一风格（原 workoutForm.css 可删）
 import "../styles/workoutForm.css";
 
 function WorkoutForm() {
@@ -12,16 +12,13 @@ function WorkoutForm() {
 
     const [editingId, setEditingId] = useState(null);
     const [name, setName] = useState("");
-    const [description, setDescription] = useState(""); // How you felt
+    const [description, setDescription] = useState("");
     const [date, setDate] = useState(
         prefillDate ? new Date(prefillDate).toISOString().split("T")[0] : ""
     );
-
     const [exercises, setExercises] = useState([
-        { name: "", type: "", sets: "", reps: "", weight: "", duration: "", distance: "", steps: "" }
+        { name:"", type:"", sets:null, reps:null, weight:null, duration:null, distance:null, steps:null }
     ]);
-
-    const fromHistory = location.state?.fromHistory || false;
 
     // Prefill when editing
     useEffect(() => {

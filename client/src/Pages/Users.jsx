@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import API from '../api/api';
-import '../styles/dashboard.css';
+import '../styles/Dashboard.css';
 import { useNavigate } from "react-router-dom";
 
 function Users() {
