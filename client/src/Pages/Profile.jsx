@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import API from '../api/api';
-import '../styles/dashboard.css'; // ← 样式与 Dashboard 统一
+import '../styles/Dashboard.css'; // ← 样式与 Dashboard 统一
 import '../styles/general.css';
 
 
