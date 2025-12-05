@@ -4,6 +4,9 @@ import API from '../api/api';
 import "../styles/general.css";
 import "../styles/Dashboard.css";
 import { LuUser, LuMail, LuCalendar, LuShield } from "react-icons/lu";
+import '../styles/Dashboard.css'; // ← 样式与 Dashboard 统一
+import '../styles/general.css';
+
 
 function Profile() {
     const [user, setUser] = useState(null);
