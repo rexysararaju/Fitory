@@ -1,112 +1,301 @@
-/***************************************
-   CLEAN + MODERN HISTORY PAGE STYLE
-****************************************/
+/* ============================================
+   HISTORY PAGE — CARD UI
+   ============================================ */
 
-/* CONTAINER */
-.history-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 32px 20px;
-}
-
-/* PAGE TITLE */
-.page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 24px;
-}
-
-/* EMPTY STATE */
-.empty-state {
-    margin-top: 40px;
-    padding: 40px;
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    text-align: center;
-    color: #6b7280;
-    font-size: 1rem;
-}
-
-/* LIST OF HISTORY CARDS */
-.history-list {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-}
-
-/* CARD */
 .history-card {
     background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
-    padding: 22px 26px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    transition: transform 0.1s ease, box-shadow 0.2s ease;
+    border-radius: 28px;
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    border: 1px solid #f1f2f6;
+    transition: 0.2s ease;
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .history-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.10);
 }
 
-/* HEADER — name & date */
-.history-header {
+
+/* ============================================
+   HEADER SECTION
+   ============================================ */
+
+.history-card-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
+    gap: 20px;
 }
 
-.history-header h3 {
-    margin: 0;
-    font-size: 1.25rem;
+.history-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.history-header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.history-title {
+    font-size: 22px;
     font-weight: 700;
-    color: #111827;
+    color: #1d1d29;
+}
+
+.tag-and-date {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.history-tag {
+    background: #efe7ff;
+    color: #7b4dff;
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 12px;
 }
 
 .history-date {
-    font-size: 0.9rem;
-    color: #6b7280;
+    color: #6b6f80;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-/* DESCRIPTION */
-.history-desc {
-    margin-top: 6px;
-    margin-bottom: 14px;
-    font-size: 0.95rem;
-    color: #4b5563;
-    line-height: 1.5;
-}
 
-/* EXERCISES CONTAINER */
-.exercise-list {
-    margin-top: 10px;
-    padding-top: 12px;
-    border-top: 1px solid #e5e7eb;
-}
+/* ============================================
+   STATS SECTION
+   ============================================ */
 
-/* EXERCISE ITEM */
-.exercise-item {
+.stats-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+    gap: 18px;
+    margin-top: 26px;
 }
 
-/* Exercise name */
-.ex-name {
+.stat-box {
+    flex: 1;
+    background: #f7f8fc;
+    padding: 18px 22px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid #eef0f5;
+}
+
+.stat-icon {
+    font-size: 22px;
+    opacity: 0.7;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #22232d;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #73788a;
+    margin-top: 2px;
+}
+
+
+/* ============================================
+   DIVIDER
+   ============================================ */
+
+.history-divider {
+    border-top: 1px solid #eceef2;
+    margin: 26px 0 18px;
+}
+
+
+/* ============================================
+   NOTES / DESCRIPTION
+   ============================================ */
+
+.history-notes {
+    font-size: 15px;
+    color: #60636f;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+
+/* ============================================
+   ACTION BUTTONS
+   ============================================ */
+
+.history-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.history-actions .btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 14px;
+    font-size: 16px;
     font-weight: 600;
-    color: #1f2937;
 }
 
-/* Reps / sets / duration */
-.ex-detail {
-    color: #6b7280;
+/* Edit */
+.history-actions .edit {
+    background: #243a9d;
+    color: white;
 }
 
-/* OPTIONAL: subtle hover for each exercise row */
-.exercise-item:hover {
-    color: #111827;
+.history-actions .edit:hover {
+    background: #1c2c76;
+}
+
+/* Delete */
+.history-actions .delete-button {
+    background: #ff6a6a;
+    color: white;
+}
+
+.history-actions .delete-button:hover {
+    background: #ff5252;
+}
+
+.history-actions .delete-confirm {
+    background: #ff3d3d;
+    color: white;
+}
+
+
+/* ============================================
+   FILTER BAR (TOP FILTER SECTION)
+   ============================================ */
+
+.filter-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    background: #f7f8ff;
+    padding: 20px 24px;
+    border-radius: 16px;
+    border: 1px solid #dee3ff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    margin-top: 10px;
+}
+
+.filter-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.filter-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a4a6a;
+}
+
+
+/* Date Input SPECIFIC TO HISTORY PAGE */
+.filter-date-input {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #cfd3ff;
+    font-size: 15px;
+    background: white;
+    color: #333;
+    outline: none;
+    transition: 0.25s ease;
+    width: 100%;
+    cursor: pointer;
+}
+
+.filter-date-input:hover {
+    border-color: #98a3ff;
+}
+
+.filter-date-input:focus {
+    border-color: #1a2069;
+    box-shadow: 0 0 0 3px rgba(94,107,255,0.22);
+}
+
+/* Clickable calendar icon */
+.filter-date-input::-webkit-calendar-picker-indicator {
+    opacity: 1 !important;
+    cursor: pointer !important;
+    display: block !important;
+}
+
+
+/* Clear filter button */
+.filter-clear-btn {
+    background: #ff6b6b;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.filter-clear-btn:hover {
+    background: #ff4a4a;
+}
+
+
+/* ============================================
+   LIST WRAPPER
+   ============================================ */
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 750px) {
+    .stats-row {
+        flex-direction: column;
+    }
+
+    .history-card {
+        padding: 22px;
+    }
+
+    .history-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+    }
+
+    .stat-box {
+        padding: 14px 16px;
+    }
 }
