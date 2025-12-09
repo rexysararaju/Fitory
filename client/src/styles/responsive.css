@@ -1,0 +1,74 @@
+/* ---------------------- */
+/* 📱 MOBILE RESPONSIVE   */
+/* ---------------------- */
+@media (max-width: 768px) {
+
+  /* Sidebar container becomes top navigation bar */
+  .sidebar-container {
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: column !important;
+    background: #0b0f35;  /* match your theme */
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  /* Logo centered */
+  .sidebar-top {
+    width: 100%;
+    justify-content: center !important;
+    padding-bottom: 10px;
+  }
+
+  /* List of pages becomes a horizontal bar */
+  .sidebar-links {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    align-items: center;
+    width: 100%;
+    padding: 6px 0;
+    gap: 0 !important;  /* remove big spacing */
+  }
+
+  .sidebar-links a {
+    flex: 1;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* Hide bottom logout on sidebar */
+  .sidebar-bottom {
+    display: none !important;
+  }
+
+  /* Logout becomes small top-right button */
+  .btn-logout {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* MAIN CONTENT FIX */
+  .main-content {
+    margin-left: 0 !important;
+    padding: 16px !important;
+  }
+
+  /* DASHBOARD CARDS FIX */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .recent-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

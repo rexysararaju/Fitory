@@ -12,16 +12,13 @@ function WorkoutForm() {
 
     const [editingId, setEditingId] = useState(null);
     const [name, setName] = useState("");
-    const [description, setDescription] = useState(""); // How you felt
+    const [description, setDescription] = useState("");
     const [date, setDate] = useState(
         prefillDate ? new Date(prefillDate).toISOString().split("T")[0] : ""
     );
-
     const [exercises, setExercises] = useState([
-        { name: "", type: "", sets: "", reps: "", weight: "", duration: "", distance: "", steps: "" }
+        { name:"", type:"", sets:null, reps:null, weight:null, duration:null, distance:null, steps:null }
     ]);
-
-    const fromHistory = location.state?.fromHistory || false;
 
     // Prefill when editing
     useEffect(() => {
