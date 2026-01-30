@@ -10,26 +10,27 @@ function WorkoutForm() {
     const location = useLocation();
     const prefillDate = location.state?.prefillDate || null;
 
+    const todayISO = new Date().toISOString().split("T")[0];
+
     const [editingId, setEditingId] = useState(null);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [date, setDate] = useState(
-        prefillDate ? new Date(prefillDate).toISOString().split("T")[0] : ""
-    );
+    const [date, setDate] = useState(prefillDate ? new Date(prefillDate).toISOString().split("T")[0] : todayISO);
     const [exercises, setExercises] = useState([
         { name:"", type:"", sets:null, reps:null, weight:null, duration:null, distance:null, steps:null }
     ]);
 
     // Prefill when editing
     useEffect(() => {
-        if (location.state?.workoutToEdit) {
-            const workout = location.state.workoutToEdit;
-            setName(workout.name);
-            setDescription(workout.description || "");
-            setExercises(workout.exercises);
-            setEditingId(workout._id);
-        }
-    }, [location.state]);
+    if (location.state?.workoutToEdit) {
+        const workout = location.state.workoutToEdit;
+        setName(workout.name);
+        setDescription(workout.description || "");
+        setExercises(workout.exercises);
+        setEditingId(workout._id);
+        setDate(workout.date ? new Date(workout.date).toISOString().split("T")[0] : todayISO);
+    }
+}, [location.state]);
 
     const handleExerciseChange = (i, field, value) => {
         const updated=[...exercises]; updated[i][field]=value; setExercises(updated);
@@ -63,8 +64,8 @@ function WorkoutForm() {
                 <div className="content-card">
 
                     {/* Title */}
-                    <div className="page-header-row">
-                        <h1 className="page-title">
+                    <div className="dashboard-header">
+                        <h1 className="dashboard-title">
                             {editingId ? "Edit Workout" : "Record New Workout"}
                         </h1>
                     </div>
@@ -85,7 +86,7 @@ function WorkoutForm() {
                                 value={description} onChange={e=>setDescription(e.target.value)} />
                         </div>
                         {/* Workout Date (Auto-filled if opened from calendar) */}
-                        <label className="auth-label">
+                        <label className="section-title">
                             Workout Date
                             <input
                                 type="date"

@@ -69,6 +69,29 @@
     transform: scale(1.05);
 }
 
+.btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn.edit {
+  background: #eef2ff;
+  color: #4f46e5;
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.12);
+}
+.btn.edit:hover { background: #e0e7ff; transform: translateY(-1px); }
+
+.btn.delete {
+  background: linear-gradient(135deg, #020617, #111827 60%, #312e81);
+  color: #f9fafb;
+  box-shadow: 0 15px 30px rgba(15, 23, 42, 0.22);
+}
+.btn.delete:hover { filter: brightness(1.04); transform: translateY(-1px); }
 
 .btn-secondary {
     flex: 1;
@@ -206,5 +229,69 @@
 .cancel-btn {
     background: #d1d5db;
     color: black;
+}
+
+/* Modal Popup Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-popup {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  text-align: center;
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-popup p {
+  font-size: 1.1rem;
+  color: #374151;
+  margin: 0 0 20px 0;
+}
+
+.modal-success {
+  border-left: 4px solid #10b981;
+}
+
+.modal-error {
+  border-left: 4px solid #ef4444;
+}
+
+.modal-close-btn {
+  background: linear-gradient(135deg, #020617, #111827 60%, #312e81);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s;
+}
+
+.modal-close-btn:hover {
+  transform: translateY(-2px);
 }
 

@@ -64,8 +64,8 @@ function ProgressPage() {
         <div className="content-card">
 
           {/* Header */}
-          <div className="page-header-row">
-            <h1 className="page-title">Progress Overview</h1>
+          <div className="dashboard-header">
+            <h1 className="dashboard-title">Progress Overview</h1>
           </div>
 
           {/* Data States */}

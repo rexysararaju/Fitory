@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom"; 
 import API from "../api/api";
 import Navbar from "../components/Navbar"; 
+import "../styles/Dashboard.css";
 import "../styles/general.css"; 
 
 function Dashboard() {
     const navigate = useNavigate();
     const [workouts, setWorkouts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [confirmDelete, setConfirmDelete] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
 
     // Fetch logic
@@ -83,13 +85,13 @@ function Dashboard() {
                     
                                     {/* =================== HERO HEADER =================== */}
                 <div className="dashboard-header">
-                <h1 className="dashboard-title">My Workout Log</h1>
+                <h1 className="dashboard-title">Workout Log</h1>
 
                 <button 
                     className="record-btn"
                     onClick={() => navigate("/create-workout")}
                 >
-                    + Record Workout
+                    <span>+ Record Workout</span>
                 </button>
              </div>
 
@@ -163,9 +165,27 @@ function Dashboard() {
                             <button className="btn edit"
                                 onClick={() => handleEdit(w)}
                             >Edit</button>
-                            <button className="btn delete"
-                                onClick={() => handleDelete(w._id)}
-                            >Delete</button>
+                            <button
+                                className={confirmDelete === w._id ? "delete-confirm" : "delete-button"}
+                                onClick={() => {
+                                    // first click asks for confirmation
+                                    if (confirmDelete !== w._id) {
+                                        setConfirmDelete(w._id);
+                                                
+                                        // auto cancel after 3 seconds
+                                        setTimeout(() => {
+                                            setConfirmDelete(null);
+                                        }, 3000);
+                                        return;
+                                    }
+                                            
+                                    // second click → delete
+                                    handleDelete(w._id);
+                                    setConfirmDelete(null);
+                                }}
+                            >                                       
+                                {confirmDelete === w._id ? "Confirm?" : "Delete"}
+                            </button>
                         </div>
                     </div>
                 ))}

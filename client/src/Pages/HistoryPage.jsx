@@ -43,14 +43,13 @@ function HistoryPage() {
             });
 
             setWorkouts(workouts.filter(w => w._id !== id));
-            setMessage("Workout deleted.");
-            setTimeout(() => setMessage(null), 2000);
+            setMessage({ type: 'success', text: 'Workout deleted.' });
+            setTimeout(() => setMessage(null), 3000);
         } catch (err) {
-            setMessage("Failed to delete.");
-            setTimeout(() => setMessage(null), 2000);
+            setMessage({ type: 'error', text: 'Failed to delete.' });
+            setTimeout(() => setMessage(null), 3000);
         }
-    };  
-
+    };    
 
 
     useEffect(() => {
@@ -66,25 +65,35 @@ function HistoryPage() {
             
             <Navbar />
 
+            {/* Modal popup for messages */}
+            {message && (
+                <div className="modal-overlay" onClick={() => setMessage(null)}>
+                    <div className={`modal-popup modal-${message.type}`} onClick={(e) => e.stopPropagation()}>
+                        <p>{message.text}</p>
+                        <button onClick={() => setMessage(null)} className="modal-close-btn">Close</button>
+                    </div>
+                </div>
+            )}
+
             {/* 3. right side: main content */}
             <main className="main-content">
                 <div className="content-card">
                     
                     <div className="page-header-row">
-                        {message && (
-                            <div className="notice-banner">
-                                {message}
-                            </div>
-                        )}
-
-                        <h1 className="page-title">
+                        <h1 className="dashboard-title">
                              {selectedDate 
                                 ? selectedDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long' }) 
-                                : "My Workout Log"}
+                                : "History"}
                         </h1>
-                        <Link to="/create-workout" className="btn-record">
-                            + Record Workout
-                        </Link>
+                        
+                        {selectedDate && (
+                                <button 
+                                    className="btn-record"
+                                    onClick={() => navigate("/create-workout", { state: { prefillDate: selectedDate } })}
+                                >
+                                    + Record Workout
+                                </button>
+                            )}
                     </div>
 
                     {!loading && (
@@ -93,15 +102,6 @@ function HistoryPage() {
                                 workouts={workouts}
                                 onDateChange={setSelectedDate}
                             />
-                            {selectedDate && (
-                                <button 
-                                    className="btn-record selected-add-btn"
-                                    onClick={() => navigate("/create-workout", { state: { prefillDate: selectedDate } })}
-                                    style={{ marginBottom: "20px" }}
-                                >
-                                    + Add Workout on {selectedDate.toLocaleDateString()}
-                                </button>
-                            )}
 
                         </div>
                     )}
@@ -126,55 +126,60 @@ function HistoryPage() {
                             <p>{selectedDate ? "No workouts found on this day." : "No workouts recorded yet."}</p>
                         </div>
                     ) : (
-                        <div className="workout-grid">
-                            {filteredWorkouts.map((w) => (
-                                <div key={w._id} className="workout-card">
-                                    <div className="card-header">
-                                        <h3>{w.name}</h3>
-                                        <span className="workout-date">{new Date(w.date).toLocaleDateString()}</span>
-                                    </div>
-                                    {w.description && <p className="workout-desc">{w.description}</p>}
-                                    <div className="exercise-list">
-                                        {w.exercises.map((ex, idx) => (
-                                            <div key={idx} className="exercise-item">
-                                                <span className="ex-name">{ex.name}</span>
-                                                <span className="ex-detail">
-                                                    {ex.sets && `${ex.sets}x${ex.reps}`}
-                                                    {ex.weight && ` (${ex.weight}kg)`}
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="card-actions" style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
-                                        <button onClick={() => handleEdit(w)} 
-                                            className="btn edit"//style={{flex:1, cursor:'pointer', padding:'8px', color:'black', border:'none', borderRadius:'30px'}}
-                                            >Edit</button>
-                                        
-                                        <button
-                                            className={confirmDelete === w._id ? "delete-confirm" : "delete-button"}
-                                            onClick={() => {
-                                                // first click asks for confirmation
-                                                if (confirmDelete !== w._id) {
-                                                    setConfirmDelete(w._id);
-                                                
-                                                    // auto cancel after 3 seconds
-                                                    setTimeout(() => {
-                                                        setConfirmDelete(null);
-                                                    }, 3000);
-                                                    return;
-                                                }
-                                            
-                                                // second click → delete
-                                                handleDelete(w._id);
-                                                setConfirmDelete(null);
-                                            }}
-                                        >                                       
-                                            {confirmDelete === w._id ? "Confirm?" : "Delete"}
-                                        </button>
-
-                                    </div>
+                        <div className="recent-grid">
+                        {filteredWorkouts.slice(0,3).map(w => (
+                            <div key={w._id} className="recent-card">
+                                
+                                <h3>{w.name}</h3>
+                
+                                <p className="date">
+                                    📅 {new Date(w.date).toLocaleDateString()}
+                                </p>
+                
+                                <p className="desc">{w.description}</p>
+                        
+                                <div className="exercise-list">
+                                    {w.exercises.map(ex => (
+                                        <div className="exercise-block" key={ex.name}>
+                                            <span>🔵 {ex.name}</span>
+                                            <p className="muted">
+                                                {ex.sets && `${ex.sets}×${ex.reps} reps @ ${ex.weight}kg`}
+                                                {ex.duration && `${ex.duration} min`}
+                                                {ex.steps && `${ex.steps} steps`}
+                                                {ex.distance && `${ex.distance} km`}
+                                            </p>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                                
+                                <div className="row-btn">
+                                    <button className="btn edit"
+                                        onClick={() => handleEdit(w)}
+                                    >Edit</button>
+                                    <button
+                                        className={confirmDelete === w._id ? "delete-confirm" : "delete-button"}
+                                        onClick={() => {
+                                            // first click asks for confirmation
+                                            if (confirmDelete !== w._id) {
+                                                setConfirmDelete(w._id);
+                                                        
+                                                // auto cancel after 3 seconds
+                                                setTimeout(() => {
+                                                    setConfirmDelete(null);
+                                                }, 3000);
+                                                return;
+                                            }
+                                                    
+                                            // second click → delete
+                                            handleDelete(w._id);
+                                            setConfirmDelete(null);
+                                        }}
+                                    >                                       
+                                        {confirmDelete === w._id ? "Confirm?" : "Delete"}
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
                         </div>
                     )}
                 </div>

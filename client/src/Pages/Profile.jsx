@@ -4,8 +4,6 @@ import API from '../api/api';
 import "../styles/general.css";
 import "../styles/Dashboard.css";
 import { LuUser, LuMail, LuCalendar, LuShield } from "react-icons/lu";
-import '../styles/Dashboard.css'; // ← 样式与 Dashboard 统一
-import '../styles/general.css';
 
 
 function Profile() {
@@ -63,8 +61,8 @@ function Profile() {
                 <div className="content-card">
 
                     {/* Page Header */}
-                    <div className="profile-header">
-                        <h1 className="page-title">My Profile</h1>
+                    <div className="dashboard-header">
+                        <h1 className="dashboard-title">My Profile</h1>
                     </div>
 
                     {loading ? (
@@ -143,7 +141,7 @@ function Profile() {
                                             </button>
                                         </>
                                     ) : (
-                                        <button className="edit-btn" onClick={() => setIsEditing(true)}>
+                                        <button className="btn edit" onClick={() => setIsEditing(true)}>
                                             Edit Profile
                                         </button>
                                     )}
